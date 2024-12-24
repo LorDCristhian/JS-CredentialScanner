@@ -1,8 +1,7 @@
 # JS-CredentialScanner
-Script en Python para la búsqueda automatizada de archivos JavaScript en páginas web, diseñado para identificar y extraer patrones clave como claves de API y tokens. Utiliza técnicas de scraping y expresiones regulares para encontrar credenciales expuestas.
 # Proyecto de Búsqueda de Archivos JS y Patrones
 
-Este proyecto permite realizar una búsqueda automatizada de archivos JavaScript (`.js`) y patrones específicos en páginas web. El proceso consiste en dos partes principales:
+Script en Python para la búsqueda automatizada de archivos JavaScript en páginas web, diseñado para identificar y extraer patrones clave como claves de API y tokens. Utiliza técnicas de scraping y expresiones regulares para encontrar credenciales expuestas. El proceso consiste en dos partes principales:
 1. Buscar archivos `.js` en las URLs proporcionadas.
 2. Buscar patrones específicos en el contenido de las páginas y los archivos `.js` encontrados.
 
