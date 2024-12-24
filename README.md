@@ -34,7 +34,8 @@ pip install -r requirements.txt
 ![Descripción de la imagen](images/image3.png)
 
 ## Notas
-- La herramienta busque los siguientes patrones por defecto, puede agregar nuevos patrones para una busqueda mas exhaustiva.
+- La herramienta busque los siguientes patrones por defecto; pero puede agregar nuevos patrones para una busqueda mas exhaustiva.
+```bash
 patrones_busqueda = {
     "Conexion_aks": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
     "Token_JWT": r"eyJ[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*",
@@ -42,4 +43,4 @@ patrones_busqueda = {
     "Authorization-Basic": r"(?i)(Authorization:\sbasic\s+[a-z0-9=:_\-+/]{5,100})",
     "Authorization-Bearer": r"(?i)(Authorization:\sbearer\s+[a-z0-9=:_\-\.+/]{5,100})",
 }
-
+```
