@@ -32,3 +32,6 @@ pip install -r requirements.txt
 ![Descripción de la imagen](images/image2.png)
 
 ![Descripción de la imagen](images/image3.png)
+
+## Notas
+- Puede agregar nuevos patrones para una busqueda mas diversificada, solo debe agregar una entrada mas en.
