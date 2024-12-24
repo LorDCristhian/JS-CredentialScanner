@@ -5,6 +5,7 @@ import os
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from colorama import Fore, Style, init
+import urllib3
 
 # Banner
 banner = """
@@ -23,6 +24,9 @@ LordCristhian
 
 print(f"{Fore.RED}{Style.BRIGHT}{banner}{Style.RESET_ALL}")
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
 if os.path.exists("checar.txt"):
     os.remove("checar.txt")
 # Banner INICIO PROCESO
@@ -36,7 +40,7 @@ def procesar_linea(linea):
     try:
         # Realizar solicitud HTTP a la URL y parsear el contenido
         url = linea.strip()
-        response = requests.get(url, timeout=15)
+        response = requests.get(url, timeout=15, verify=False)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -62,7 +66,7 @@ def procesar_linea(linea):
 def procesar_url(url):
     print(f"{Fore.GREEN}{Style.BRIGHT}[✓] Procesando URL: {Style.RESET_ALL}{url}")
     try:
-        response = requests.get(url, timeout=20)
+        response = requests.get(url, timeout=20,verify=False)
         response.raise_for_status()
         contenido = response.text
         patrones_encontrados = {}
