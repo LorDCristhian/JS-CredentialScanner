@@ -23,5 +23,5 @@ Puedes instalar todas las dependencias necesarias ejecutando el siguiente comand
 
 ```bash
 pip install -r requirements.txt
-
+```
 ## Modo de uso
