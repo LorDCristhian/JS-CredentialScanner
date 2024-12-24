@@ -34,7 +34,7 @@ pip install -r requirements.txt
 ![Descripción de la imagen](images/image3.png)
 
 ## Notas
-- La herramienta busque los siguientes patrones por defecto; pero puede agregar nuevos patrones para una busqueda mas exhaustiva.
+- La herramienta busque los siguientes patrones por defecto; pero puedes agregar nuevos patrones para una busqueda mas exhaustiva.
 ```bash
 patrones_busqueda = {
     "Conexion_aks": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
