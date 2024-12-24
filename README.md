@@ -25,4 +25,4 @@ Puedes instalar todas las dependencias necesarias ejecutando el siguiente comand
 pip install -r requirements.txt
 ```
 ## Modo de uso
-![Descripción de la imagen](image/imagen.jpg)
+![Descripción de la imagen](images/image.png)
