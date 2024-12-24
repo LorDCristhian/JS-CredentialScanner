@@ -26,3 +26,5 @@ pip install -r requirements.txt
 ```
 ## Modo de uso
 ![Descripción de la imagen](images/image.png)
+
+![Descripción de la imagen](images1/image.png)
