@@ -34,4 +34,12 @@ pip install -r requirements.txt
 ![Descripción de la imagen](images/image3.png)
 
 ## Notas
-- Puede agregar nuevos patrones para una busqueda mas diversificada, solo debe agregar una entrada mas en.
+- La herramienta busque los siguientes patrones por defecto, puede agregar nuevos patrones para una busqueda mas exhaustiva.
+patrones_busqueda = {
+    "Conexion_aks": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
+    "Token_JWT": r"eyJ[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*",
+    "Google-api-key": r"(?i)AIza[0-9A-Za-z\-_]{35}",
+    "Authorization-Basic": r"(?i)(Authorization:\sbasic\s+[a-z0-9=:_\-+/]{5,100})",
+    "Authorization-Bearer": r"(?i)(Authorization:\sbearer\s+[a-z0-9=:_\-\.+/]{5,100})",
+}
+
