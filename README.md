@@ -30,3 +30,5 @@ pip install -r requirements.txt
 ![Descripción de la imagen](images/image1.png)
 
 ![Descripción de la imagen](images/image2.png)
+
+![Descripción de la imagen](images/image3.png)
