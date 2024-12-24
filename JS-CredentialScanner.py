@@ -29,8 +29,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 if os.path.exists("checar.txt"):
     os.remove("checar.txt")
-# Banner INICIO PROCESO
-#print(f"{Fore.CYAN}{Style.BRIGHT}================= INICIO DEL PROCESO ================={Style.RESET_ALL}")
 
 # Solicitar el archivo de entrada para las URLs de búsqueda de JS
 archivo_entrada = input(f"{Fore.YELLOW}{Style.BRIGHT}Por favor, ingrese el nombre del archivo con las URLs de búsqueda (ejemplo: url.txt): {Style.RESET_ALL}")
@@ -122,15 +120,11 @@ if __name__ == "__main__":
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(procesar_url, urls)
 
-    # Banner FIN PROCESO
-    #print(f"{Fore.CYAN}{Style.BRIGHT}================= FIN DEL PROCESO ================={Style.RESET_ALL}")
-
     # Imprimir los valores buscados
     print(f"{Fore.CYAN}{Style.BRIGHT}================= PATRONES BUSCADOS ================={Style.RESET_ALL}")
     for clave, valor in patrones_busqueda.items():
         print(f"{Fore.YELLOW}{Style.BRIGHT}[☀] {clave} : {valor}{Style.RESET_ALL}")
 
-    # Imprimir margen
     print(f"{Fore.CYAN}{Style.BRIGHT}================= RESULTADO DE LAS BUSQUEDAS ================={Style.RESET_ALL}")
 
     # Imprimir resultados al final
