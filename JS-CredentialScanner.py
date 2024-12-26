@@ -30,19 +30,19 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 if os.path.exists("checar.txt"):
     os.remove("checar.txt")
 
-# Solicitar el archivo de entrada para las URLs de búsqueda de JS
+
 archivo_entrada = input(f"{Fore.YELLOW}{Style.BRIGHT}Por favor, ingrese el nombre del archivo con las URLs de búsqueda (ejemplo: url.txt): {Style.RESET_ALL}")
 
-# Función para procesar las líneas de entrada y obtener las rutas de archivos JS
+
 def procesar_linea(linea):
     try:
-        # Realizar solicitud HTTP a la URL y parsear el contenido
+        
         url = linea.strip()
         response = requests.get(url, timeout=15, verify=False)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Iterar sobre las etiquetas <script> y extraer rutas
+        
         rutas = []
         for script_tag in soup.find_all('script', src=True):
             src = script_tag['src']
@@ -50,17 +50,17 @@ def procesar_linea(linea):
                 ruta_absoluta = urljoin(url, src)
                 rutas.append(ruta_absoluta)
 
-        # Imprimir las rutas y almacenarlas en el archivo "checar.txt"
+       
         with open("checar.txt", "a") as archivo_checar:
             for ruta in rutas:
                 print(ruta)
                 archivo_checar.write(f"{ruta}\n")
 
     except Exception:
-        # Omitir cualquier error en la solicitud HTTP, el análisis HTML, o la escritura en el archivo
+        
         pass
 
-# Función para procesar una URL y buscar patrones
+
 def procesar_url(url):
     print(f"{Fore.GREEN}{Style.BRIGHT}[✓] Procesando URL: {Style.RESET_ALL}{url}")
     try:
@@ -77,10 +77,10 @@ def procesar_url(url):
     except requests.exceptions.RequestException as e:
         print(f"{Fore.RED}{Style.BRIGHT}[x] Error al procesar URL: {Style.RESET_ALL}{url}")
 
-# Lista para almacenar los resultados de patrones
+
 resultados = []
 
-# Diccionario de patrones a buscar
+
 patrones_busqueda = {
     "Conexion_aks": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
     "Token_JWT": r"eyJ[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*",
@@ -90,7 +90,7 @@ patrones_busqueda = {
 }
 
 if __name__ == "__main__":
-    # Verificar si el archivo de entrada existe
+    
     try:
         with open(archivo_entrada, "r") as archivo:
             lineas = archivo.readlines()
@@ -98,14 +98,14 @@ if __name__ == "__main__":
         print(f"{Fore.RED}{Style.BRIGHT}El archivo {archivo_entrada} no existe.{Style.RESET_ALL}")
         exit(1)
 
-    # Informar que el proceso de búsqueda de archivos JS ha comenzado
+    
     print(f"{Fore.CYAN}{Style.BRIGHT}================= INICIO DE LA BUSQUEDA DE ARCHIVOS JS ================={Style.RESET_ALL}")
 
-    # Utilizar ThreadPoolExecutor para procesar las líneas en paralelo
+    
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(procesar_linea, lineas)
 
-    # Leer las URLs del archivo "checar.txt" después de haber procesado todas las líneas
+    
     try:
         with open("checar.txt", "r") as file:
             urls = file.read().splitlines()
@@ -113,10 +113,10 @@ if __name__ == "__main__":
         print(f"{Fore.RED}{Style.BRIGHT}El archivo checar.txt no existe o no se genero.{Style.RESET_ALL}")
         exit(1)
 
-    # Informar que el proceso de búsqueda de patrones ha comenzado
+    
     print(f"{Fore.CYAN}{Style.BRIGHT}================= INICIO DE LA BUSQUEDA DE PATRONES ================={Style.RESET_ALL}")
 
-    # Usar ThreadPoolExecutor para procesar las URL en paralelo y buscar patrones
+    
     with concurrent.futures.ThreadPoolExecutor() as executor:
         executor.map(procesar_url, urls)
 
