@@ -81,6 +81,31 @@ class JSAnalyzer:
         self.patrones_busqueda = self._cargar_patrones_mejorados()
         self.resultados = []
         
+        # Definir patrones por severidad una sola vez
+        self.severidad_alta = {
+            "AWS Access Key ID", 
+            "AWS Secret Access Key", 
+            "Azure Storage Account Key",
+            "Token_JWT", 
+            "Conexion_aks",
+            "Authorization-Bearer",
+            "Authorization-Basic",
+            "Passwords"
+        }
+        
+        self.severidad_media = {
+            "Github Access Token",
+            "Generic_Secret_Base64"
+        }
+        
+        self.severidad_baja = {
+            "Activos_movistar.com.pe",
+            "Activos_telefonica.com.pe", 
+            "Activos_serviciosmovistar.com",
+            "Google-api-key",
+            "Base64_text"
+        }
+        
     def _cargar_patrones_mejorados(self) -> Dict[str, str]:
         """Patrones mejorados con IA para detectar secrets más efectivamente"""
         return {
@@ -94,7 +119,7 @@ class JSAnalyzer:
             "AWS Secret Access Key": r"(?i)aws_secret_access_key\s*(?:=|:)\s*['\"]?[A-Za-z0-9\/+=]{40,}['\"]?",
             "Github Access Token": r"gh[pous]_[A-Za-z0-9_]{36,}",
             "Azure Storage Account Key": r"(?i)AccountKey\s*=\s*[A-Za-z0-9+/=]{88}",
-            "Base64 Secret": r"(?<![A-Za-z0-9+/=])[A-Za-z0-9+/]{10,}==(?=\b|[^A-Za-z0-9+/=])",
+            "Base64_text": r"(?<![A-Za-z0-9+/=])[A-Za-z0-9+/]{10,}==(?=\b|[^A-Za-z0-9+/=])",
             "Generic_Secret_Base64": r"(?i)(?:secret|key|token)\s*(?:=|:)\s*['\"]?[A-Za-z0-9+/=]{20,}['\"]?",
             "Activos_movistar.com.pe": r"\b(?:[a-z0-9-]+\.)*movistar\.com\.pe\b",
             "Activos_telefonica.com.pe": r"\b(?:[a-z0-9-]+\.)*telefonica\.com\.pe\b",
@@ -259,82 +284,75 @@ class JSAnalyzer:
                 
             print(f"{Fore.GREEN}Resultados guardados en {self.config.RESULTS_FILE}{Style.RESET_ALL}")
 
-    def _calcular_severidad(self, patrones: Dict) -> str:
-        """Calcula la severidad basada en los patrones encontrados - CORREGIDO"""
+    def _calcular_severidad(self, patrones: Dict) -> Dict[str, int]:
+        """Calcula la severidad por tipo de patrón encontrado - MODIFICADO"""
         
-        # PATRONES DE ALTA severidad - CREDENCIALES EXPLÍCITAS
-        severidad_alta = {
-            "AWS Access Key ID", 
-            "AWS Secret Access Key", 
-            "Azure Storage Account Key",
-            "Token_JWT", 
-            "Conexion_aks",
-            "Authorization-Bearer",
-            "Authorization-Basic",
-            "Passwords"  # Las contraseñas deberían ser ALTA
-        }
+        # Contar patrones por severidad
+        contador = {"alta": 0, "media": 0, "baja": 0}
         
-        # PATRONES DE MEDIA severidad - Posibles secrets que requieren revisión
-        severidad_media = {
-            "Github Access Token",
-            "Generic_Secret_Base64",
-            "Base64 Secret"
-        }
+        for nombre_patron in patrones.keys():
+            if nombre_patron in self.severidad_alta:
+                contador["alta"] += 1
+            elif nombre_patron in self.severidad_media:
+                contador["media"] += 1
+            elif nombre_patron in self.severidad_baja:
+                contador["baja"] += 1
         
-        # PATRONES DE BAJA severidad - Información no crítica
-        severidad_baja = {
-            "Activos_movistar.com.pe",
-            "Activos_telefonica.com.pe", 
-            "Activos_serviciosmovistar.com",
-            "Google-api-key"  # Dependiendo del contexto, podría ser baja
-        }
-        
-        # Verificar por orden de prioridad
-        for patron in patrones.keys():
-            if patron in severidad_alta:
-                return "ALTA"
-        
-        for patron in patrones.keys():
-            if patron in severidad_media:
-                return "MEDIA"
-        
-        for patron in patrones.keys():
-            if patron in severidad_baja:
-                return "BAJA"
-        
-        # Si no coincide con ninguna categoría conocida, clasificar como MEDIA por precaución
-        return "BAJA"
+        return contador
 
     def mostrar_resumen_completo(self):
-        """Muestra un resumen ejecutivo completo de los resultados"""
+        """Muestra un resumen ejecutivo completo de los resultados - MODIFICADO"""
         if not self.resultados:
             print(f"{Fore.YELLOW}No se encontraron patrones sensibles.{Style.RESET_ALL}")
             return
             
-        # Separar resultados por severidad - CORREGIDO
-        resultados_alta = [(url, patrones) for url, patrones in self.resultados if self._calcular_severidad(patrones) == "ALTA"]
-        resultados_media = [(url, patrones) for url, patrones in self.resultados if self._calcular_severidad(patrones) == "MEDIA"]
-        resultados_baja = [(url, patrones) for url, patrones in self.resultados if self._calcular_severidad(patrones) == "BAJA"]
+        # Calcular estadísticas por severidad de patrones
+        total_patrones_alta = 0
+        total_patrones_media = 0
+        total_patrones_baja = 0
+        total_patrones_general = 0
         
-        total_patrones = sum(len(patrones) for _, patrones in self.resultados)
+        for url, patrones in self.resultados:
+            severidad = self._calcular_severidad(patrones)
+            total_patrones_alta += severidad["alta"]
+            total_patrones_media += severidad["media"]
+            total_patrones_baja += severidad["baja"]
+            total_patrones_general += len(patrones)
         
         print(f"\n{Fore.CYAN}{Style.BRIGHT}=== RESUMEN EJECUTIVO COMPLETO ==={Style.RESET_ALL}")
         print(f"{Fore.GREEN}Total URLs analizadas: {len(self.resultados)}")
-        print(f"{Fore.YELLOW}Total de patrones encontrados: {total_patrones}")
-        print(f"{Fore.RED}URLs con severidad ALTA: {len(resultados_alta)}{Style.RESET_ALL}")
-        print(f"{Fore.YELLOW}URLs con severidad MEDIA: {len(resultados_media)}{Style.RESET_ALL}")
-        print(f"{Fore.GREEN}URLs con severidad BAJA: {len(resultados_baja)}{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}Total de patrones encontrados: {total_patrones_general}")
+        print(f"{Fore.RED}Patrones con severidad ALTA: {total_patrones_alta}{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}Patrones con severidad MEDIA: {total_patrones_media}{Style.RESET_ALL}")
+        print(f"{Fore.GREEN}Patrones con severidad BAJA: {total_patrones_baja}{Style.RESET_ALL}")
         
-        # Mostrar resultados por severidad
-        self._mostrar_resultados_por_severidad("ALTA", resultados_alta, Fore.RED)
-        self._mostrar_resultados_por_severidad("MEDIA", resultados_media, Fore.YELLOW)
-        self._mostrar_resultados_por_severidad("BAJA", resultados_baja, Fore.GREEN)
+        # Mostrar resultados manteniendo el formato original de agrupación por URL
+        self._mostrar_resultados_por_severidad("ALTA", self.resultados, Fore.RED)
+        self._mostrar_resultados_por_severidad("MEDIA", self.resultados, Fore.YELLOW)
+        self._mostrar_resultados_por_severidad("BAJA", self.resultados, Fore.GREEN)
 
     def _mostrar_resultados_por_severidad(self, severidad: str, resultados: List, color: str):
-        """Muestra resultados agrupados por severidad"""
-        if resultados:
-            print(f"\n{color}{Style.BRIGHT}=== URLs CON SEVERIDAD {severidad} ({len(resultados)}) ==={Style.RESET_ALL}")
-            for url, patrones in resultados:
+        """Muestra resultados agrupados por severidad - MODIFICADO para usar las definiciones existentes"""
+        
+        # Usar las definiciones existentes de severidad
+        if severidad == "ALTA":
+            patrones_severidad = self.severidad_alta
+        elif severidad == "MEDIA":
+            patrones_severidad = self.severidad_media
+        else:  # BAJA
+            patrones_severidad = self.severidad_baja
+        
+        # Filtrar resultados que contengan patrones de la severidad especificada
+        resultados_filtrados = []
+        for url, patrones in resultados:
+            patrones_filtrados = {nombre: coincidencias for nombre, coincidencias in patrones.items() 
+                                 if nombre in patrones_severidad}
+            if patrones_filtrados:
+                resultados_filtrados.append((url, patrones_filtrados))
+        
+        if resultados_filtrados:
+            print(f"\n{color}{Style.BRIGHT}=== PATRONES CON SEVERIDAD {severidad} ({len(resultados_filtrados)} URLs) ==={Style.RESET_ALL}")
+            for url, patrones in resultados_filtrados:
                 print(f"\n{color}🔍 {url}{Style.RESET_ALL}")
                 for nombre, coincidencias in patrones.items():
                     print(f"   \033[1m\033[97m⚠ {nombre}:\033[0m{Style.RESET_ALL}")
