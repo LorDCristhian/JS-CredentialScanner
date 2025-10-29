@@ -215,7 +215,7 @@ class JSAnalyzer:
         return url, {}
 
     def _buscar_patrones_inteligente(self, contenido: str, url: str) -> Dict:
-        """Búsqueda inteligente de patrones"""
+        """Búsqueda inteligente de patrones con eliminación de duplicados"""
         patrones_encontrados = {}
         
         for nombre, patron in self.patrones_busqueda.items():
@@ -297,7 +297,7 @@ class JSAnalyzer:
             print(f"{Fore.GREEN}Resultados guardados en {self.config.RESULTS_FILE}{Style.RESET_ALL}")
 
     def _calcular_severidad(self, patrones: Dict) -> Dict[str, int]:
-        """Calcula la severidad por tipo de patrón encontrado - MODIFICADO"""
+        """Calcula la severidad por tipo de patrón encontrado"""
         
         # Contar patrones por severidad
         contador = {"alta": 0, "media": 0, "baja": 0}
@@ -313,7 +313,7 @@ class JSAnalyzer:
         return contador
 
     def mostrar_resumen_completo(self):
-        """Muestra un resumen ejecutivo completo de los resultados - MODIFICADO"""
+        """Muestra un resumen ejecutivo completo de los resultados"""
         if not self.resultados:
             print(f"{Fore.YELLOW}No se encontraron patrones sensibles.{Style.RESET_ALL}")
             return
@@ -344,7 +344,7 @@ class JSAnalyzer:
         self._mostrar_resultados_por_severidad("BAJA", self.resultados, Fore.GREEN)
 
     def _mostrar_resultados_por_severidad(self, severidad: str, resultados: List, color: str):
-        """Muestra resultados agrupados por severidad - MODIFICADO para usar las definiciones existentes"""
+        """Muestra resultados agrupados por severidad SIN DUPLICADOS dentro de cada URL"""
         
         # Usar las definiciones existentes de severidad
         if severidad == "ALTA":
@@ -357,8 +357,18 @@ class JSAnalyzer:
         # Filtrar resultados que contengan patrones de la severidad especificada
         resultados_filtrados = []
         for url, patrones in resultados:
-            patrones_filtrados = {nombre: coincidencias for nombre, coincidencias in patrones.items() 
-                                 if nombre in patrones_severidad}
+            patrones_filtrados = {}
+            for nombre, coincidencias in patrones.items():
+                if nombre in patrones_severidad:
+                    # ELIMINAR DUPLICADOS aquí también por si acaso
+                    coincidencias_unicas = []
+                    vistas = set()
+                    for coincidencia in coincidencias:
+                        if coincidencia not in vistas:
+                            vistas.add(coincidencia)
+                            coincidencias_unicas.append(coincidencia)
+                    patrones_filtrados[nombre] = coincidencias_unicas
+            
             if patrones_filtrados:
                 resultados_filtrados.append((url, patrones_filtrados))
         
