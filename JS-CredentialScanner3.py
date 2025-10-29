@@ -87,15 +87,21 @@ class JSAnalyzer:
             "AWS Secret Access Key", 
             "Azure Storage Account Key",
             "Token_JWT", 
-            "Conexion_aks",
+            "Azure_Storage_Connection_String",
             "Authorization-Bearer",
             "Authorization-Basic",
-            "Passwords"
+            "Passwords",
+            "Client_ID|Tenant_ID|Subscription_ID_Azure",
+            "Client_Secret_Azure",
+            "Azure_Storage_Account_Key",
+            "OAuth2_Azure"
+
         }
         
         self.severidad_media = {
             "Github Access Token",
             "Generic_Secret_Base64"
+
         }
         
         self.severidad_baja = {
@@ -109,7 +115,7 @@ class JSAnalyzer:
     def _cargar_patrones_mejorados(self) -> Dict[str, str]:
         """Patrones mejorados con IA para detectar secrets más efectivamente"""
         return {
-            "Conexion_aks": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
+            "Azure_Storage_Connection_String": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
             "Token_JWT": r"eyJ[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*",
             "Google-api-key": r"(?i)AIza[0-9A-Za-z\-_]{35}",
             "Authorization-Basic": r"(?i)(Authorization:\sbasic\s+[a-z0-9=:_\-+/]{5,100})",
@@ -124,6 +130,10 @@ class JSAnalyzer:
             "Activos_movistar.com.pe": r"\b(?:[a-z0-9-]+\.)*movistar\.com\.pe\b",
             "Activos_telefonica.com.pe": r"\b(?:[a-z0-9-]+\.)*telefonica\.com\.pe\b",
             "Activos_serviciosmovistar.com": r"\b(?:[A-Za-z0-9-]+\.)*serviciosmovistar\.com\b",
+            "Client_ID|Tenant_ID|Subscription_ID_Azure": r"\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b",
+            "Client_Secret_Azure": r"(?i)(client[_-]?secret|secret[_-]?key)\s*(=|:)\s*['\"][^'\"]{8,}['\"]",
+            "Azure_Storage_Account_Key": r"(?i)(accountkey|storagekey)\s*(=|:)\s*['\"][A-Za-z0-9+/=]{20,}['\"]",
+            "OAuth2_Azure": r"https?://[a-zA-Z0-9\.-]+(?:b2clogin|login\.microsoftonline|login\.windows\.net)[^\s'\"<>]*"
         }
 
     async def procesar_url_async(self, session: aiohttp.ClientSession, url: str) -> Tuple[str, Dict]:
@@ -156,7 +166,9 @@ class JSAnalyzer:
             "afternic.com",
             "unbounce.com",
             "msauth.net",
-            "linkedin.com"
+            "linkedin.com",
+            "hotjar.com",
+            "googleapis.com"
         ]
         
         # Verificar si la URL pertenece a un dominio excluido
