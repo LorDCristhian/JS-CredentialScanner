@@ -91,16 +91,25 @@ class JSAnalyzer:
             "Authorization-Bearer",
             "Authorization-Basic",
             "Passwords",
-            "Client_ID|Tenant_ID|Subscription_ID_Azure",
-            "Client_Secret_Azure",
+            "Azure_Tenant_ID | Azure_Client_ID | Azure_Subscription_ID",
+            "Azure_Client_Secret",
             "Azure_Storage_Account_Key",
-            "OAuth2_Azure"
+            "OAuth2_Azure",
+            "Azure_Tenant_Domain",
+            "Azure_SAS_Token",
+            "Azure_SQL_Connection_String",
+            "Azure_CosmosDB_Key",
+            "Azure_Function_Key",
+            "Azure_App_Insights_InstrumentationKey"
+
 
         }
         
         self.severidad_media = {
             "Github Access Token",
-            "Generic_Secret_Base64"
+            "Generic_Secret_Base64",
+            "Azure_Container_Registry",
+            "Azure_KeyVault_Secret_URI"
 
         }
         
@@ -109,13 +118,19 @@ class JSAnalyzer:
             "Activos_telefonica.com.pe", 
             "Activos_serviciosmovistar.com",
             "Google-api-key",
-            "Base64_text"
+            "Base64_text",
+            "Azure_Authority_URL",
+            "Azure_AD_B2C_Policy",
+            "Azure_AD_Endpoint",
+            "Azure_Managed_Identity_Endpoint",
+            "Azure_Storage_Endpoint",
+            "Azure_SPN_Object_ID"
+
         }
         
     def _cargar_patrones_mejorados(self) -> Dict[str, str]:
         """Patrones mejorados con IA para detectar secrets más efectivamente"""
         return {
-            "Azure_Storage_Connection_String": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
             "Token_JWT": r"eyJ[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*",
             "Google-api-key": r"(?i)AIza[0-9A-Za-z\-_]{35}",
             "Authorization-Basic": r"(?i)(Authorization:\sbasic\s+[a-z0-9=:_\-+/]{5,100})",
@@ -130,10 +145,25 @@ class JSAnalyzer:
             "Activos_movistar.com.pe": r"\b(?:[a-z0-9-]+\.)*movistar\.com\.pe\b",
             "Activos_telefonica.com.pe": r"\b(?:[a-z0-9-]+\.)*telefonica\.com\.pe\b",
             "Activos_serviciosmovistar.com": r"\b(?:[A-Za-z0-9-]+\.)*serviciosmovistar\.com\b",
-            "Client_ID|Tenant_ID|Subscription_ID_Azure": r"\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b",
-            "Client_Secret_Azure": r"(?i)(client[_-]?secret|secret[_-]?key)\s*(=|:)\s*['\"][^'\"]{8,}['\"]",
+            "OAuth2_Azure": r"https?://[a-zA-Z0-9\.-]+(?:b2clogin|login\.microsoftonline|login\.windows\.net)[^\s'\"<>]*",
+            "Azure_Client_Secret": r"(?i)(client[_-]?secret|secret[_-]?key)\s*(=|:)\s*['\"][A-Za-z0-9\-_!@#\$%\^&\*]{16,}['\"]",
+            "Azure_Tenant_Domain": r"(?i)[a-z0-9.-]+\.onmicrosoft\.com",
+            "Azure_Tenant_ID | Azure_Client_ID | Azure_Subscription_ID": r"\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b",
+            "Azure_Authority_URL": r"https:\/\/login\.microsoftonline\.com\/[a-z0-9\.-]+\/?(oauth2|v2\.0)?",
+            "Azure_AD_B2C_Policy": r"(?i)b2c_[a-z0-9_-]{5,}",
+            "Azure_AD_Endpoint": r"(?i)https:\/\/[a-z0-9\.-]+(?:b2clogin|login\.microsoftonline|login\.windows\.net)[^\s'\"<>]*",
+            "Azure_Storage_Connection_String": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
             "Azure_Storage_Account_Key": r"(?i)(accountkey|storagekey)\s*(=|:)\s*['\"][A-Za-z0-9+/=]{20,}['\"]",
-            "OAuth2_Azure": r"https?://[a-zA-Z0-9\.-]+(?:b2clogin|login\.microsoftonline|login\.windows\.net)[^\s'\"<>]*"
+            "Azure_SAS_Token": r"(?i)sv=\d{4}-\d{2}-\d{2}&ss=[a-z]+&srt=[a-z]+&sp=[a-z]+&se=[0-9T:-]+&st=[0-9T:-]+&spr=https?&sig=[A-Za-z0-9%+/=]+",
+            "Azure_SQL_Connection_String": r"(?i)Server=tcp:[^;]+\.database\.windows\.net;[^;]*User ID=[^;]+;[^;]*Password=[^;]+;",
+            "Azure_CosmosDB_Key": r"(?i)AccountEndpoint=https:\/\/[^;]+\.documents\.azure\.com;AccountKey=[A-Za-z0-9+/=]{88};",
+            "Azure_Function_Key": r"(?i)(x-functions-key|code)\s*[:=]\s*['\"][A-Za-z0-9\-_]{20,}['\"]",
+            "Azure_Managed_Identity_Endpoint": r"(?i)http:\/\/169\.254\.169\.254\/metadata\/identity\/oauth2\/token",
+            "Azure_Container_Registry": r"(?i)[a-z0-9]+\.azurecr\.io",
+            "Azure_Storage_Endpoint": r"(?i)https:\/\/[a-z0-9-]+\.blob\.core\.windows\.net",
+            "Azure_KeyVault_Secret_URI": r"https:\/\/[a-z0-9-]+\.vault\.azure\.net\/secrets\/[a-zA-Z0-9-]+\/[a-zA-Z0-9]+",
+            "Azure_App_Insights_InstrumentationKey": r"(?i)InstrumentationKey\s*=\s*[0-9a-f-]{36}",
+            "Azure_SPN_Object_ID": r"(?i)objectid\s*(=|:)\s*['\"][0-9a-f-]{36}['\"]"
         }
 
     async def procesar_url_async(self, session: aiohttp.ClientSession, url: str) -> Tuple[str, Dict]:
