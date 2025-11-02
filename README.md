@@ -1,46 +1,142 @@
 # JS-CredentialScanner
 # Proyecto de Búsqueda de Archivos JS y Patrones
 
-Script en Python para la búsqueda automatizada de archivos JavaScript en páginas web, diseñado para identificar y extraer patrones clave como claves de API y tokens. Utiliza técnicas de scraping y expresiones regulares para encontrar credenciales expuestas. El proceso consiste en dos partes principales:
-1. Buscar archivos `.js` en las URLs proporcionadas.
-2. Buscar patrones específicos en el contenido de las páginas y los archivos `.js` encontrados.
+JS-CredentialScanner es una herramienta profesional de seguridad diseñada para auditores, pentesters y equipos de seguridad ofensiva. Realiza análisis exhaustivo de archivos JavaScript en aplicaciones web para identificar información sensible, credenciales filtradas, tokens de API y configuraciones de seguridad expuestas.
+
+¿Por qué usar JS-CredentialScanner?
+
+Análisis en 3 Fases: Búsqueda estática, dinámica (Selenium) y análisis de patrones
+Detección de 30+ patrones de seguridad críticos
+Alto rendimiento: Procesamiento asíncrono masivo con hasta 50 conexiones concurrentes
+Clasificación por severidad: Alta, Media y Baja
+Sin duplicados: Sistema inteligente de eliminación de URLs y patrones repetidos
+Thread-safe: Operaciones seguras en entornos multi-hilo
 
 ## Características
 
-- **Búsqueda de Archivos JS**: Se obtienen las URLs de los archivos `.js` desde páginas HTML.
-- **Búsqueda de Patrones Específicos**: Se buscan patrones específicos dentro del contenido de las páginas, como claves de API, tokens JWT, cadenas de autorización, entre otros.
-- **Ejecución en Paralelo**: El proceso de búsqueda se realiza en paralelo utilizando `ThreadPoolExecutor` para mejorar la eficiencia.
+1. **Fase 1 - Búsqueda Estática**
+   - Extracción de archivos JS mediante parsing HTML
+   - Procesamiento paralelo con ThreadPoolExecutor
+   - Soporte para 30 workers concurrentes
 
-## Requisitos
+2. **Fase 2 - Búsqueda Dinámica**
+   - Renderizado con Selenium + ChromeDriver
+   - Extracción desde Network Performance Logs
+   - Detección de JS cargados dinámicamente
+   - Scroll automático para trigger de lazy loading
 
-Este proyecto requiere Python 3 y las siguientes bibliotecas:
+3. **Fase 3 - Análisis de Patrones**
+   - Procesamiento asíncrono con aiohttp
+   - 50 conexiones HTTP concurrentes
+   - Análisis de contenido con 30+ patrones regex
 
-- `requests`
-- `beautifulsoup4`
-- `colorama`
+## Instalación
 
-Puedes instalar todas las dependencias necesarias ejecutando el siguiente comando:
+## 🔧 Instalación
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tuusuario/redteam-js-analyzer.git
+cd redteam-js-analyzer
+```
+
+### 2. Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
-## Modo de uso
-![Descripción de la imagen](images/image.png)
 
-![Descripción de la imagen](images/image222.png)
-
-![Descripción de la imagen](images/image2.png)
-
-![Descripción de la imagen](images/image3.png)
-
-## Notas
-- La herramienta busca los siguientes patrones por defecto; pero puedes agregar nuevos patrones para una busqueda mas exhaustiva.
+**En sistemas Linux (si es necesario):**
 ```bash
-patrones_busqueda = {
-    "Conexion_aks": r"DefaultEndpointsProtocol=https;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=core\.windows\.net",
-    "Token_JWT": r"eyJ[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*",
-    "Google-api-key": r"(?i)AIza[0-9A-Za-z\-_]{35}",
-    "Authorization-Basic": r"(?i)(Authorization:\sbasic\s+[a-z0-9=:_\-+/]{5,100})",
-    "Authorization-Bearer": r"(?i)(Authorization:\sbearer\s+[a-z0-9=:_\-\.+/]{5,100})",
-}
+pip install -r requirements.txt --break-system-packages
 ```
+
+### 3. Verificar instalación de Chrome
+
+```bash
+google-chrome --version
+# O en macOS:
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version
+```
+
+## 🎮 Modos de Operación
+
+### Modo 1: Búsqueda Completa + Análisis
+
+**Ideal para**: Auditorías completas desde cero
+
+**Proceso**:
+```
+URLs de entrada → Búsqueda estática → Búsqueda dinámica → Análisis de patrones
+```
+
+**Archivo de entrada**: `url.txt` (una URL por línea)
+
+**Ejemplo de url.txt**:
+```
+https://example.com
+https://target-site.com/app
+https://api.company.com
+```
+
+**Salidas**:
+- `checar.txt` - Lista de todos los archivos JS encontrados (sin duplicados)
+- `resultados_detallados.json` - Hallazgos con severidad y contexto
+
+---
+
+### Modo 2: Análisis Directo de JS
+
+**Ideal para**: Análisis rápido de archivos JS conocidos
+
+**Proceso**:
+```
+Archivo JS → Análisis de patrones → Resultados
+```
+
+**Archivo de entrada**: Archivo con URLs de archivos JS
+
+**Ejemplo**:
+```
+https://site.com/static/app.min.js
+https://site.com/assets/bundle.js
+https://cdn.example.com/libs/auth.js
+```
+
+---
+
+## 🔐 Patrones Detectados
+
+### Severidad ALTA 🔴
+
+| Patrón | Descripción | Impacto |
+|--------|-------------|---------|
+| AWS Access Key ID | `AKIA[0-9A-Z]{16}` | Acceso a infraestructura AWS |
+| AWS Secret Access Key | Claves secretas de AWS | Compromiso total de cuenta |
+| Azure Storage Account Key | Claves de almacenamiento Azure | Acceso a blobs y archivos |
+| Token JWT | Tokens de autenticación | Suplantación de identidad |
+| Authorization Headers | Basic/Bearer tokens | Acceso no autorizado |
+| Passwords Hardcoded | Contraseñas en código | Compromiso de cuentas |
+| Azure Client Secret | Secretos de aplicación | Acceso a recursos Azure |
+| Azure SAS Token | Tokens de acceso compartido | Acceso temporal a recursos |
+
+### Severidad MEDIA 🟡
+
+| Patrón | Descripción | Impacto |
+|--------|-------------|---------|
+| GitHub Access Token | `ghp_`, `gho_`, `ghu_`, `ghs_` | Acceso a repositorios |
+| Generic Secret Base64 | Secretos codificados | Posible exposición de credenciales |
+| Azure Container Registry | URLs de registros | Acceso a imágenes Docker |
+| Azure KeyVault URIs | URIs de secretos | Ubicación de secretos |
+
+### Severidad BAJA 🟢
+
+| Patrón | Descripción | Impacto |
+|--------|-------------|---------|
+| Google API Key | Claves de API pública | Uso no autorizado de servicios |
+| Base64 Text | Texto codificado | Posible información sensible |
+| Azure Authority URLs | Endpoints de autenticación | Información de configuración |
+| Activos Movistar/Telefónica | Subdominios internos | Descubrimiento de activos |
+
+---
