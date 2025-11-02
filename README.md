@@ -3,14 +3,14 @@
 
 JS-CredentialScanner es una herramienta profesional de seguridad diseñada para auditores, pentesters y equipos de seguridad ofensiva. Realiza análisis exhaustivo de archivos JavaScript en aplicaciones web para identificar información sensible, credenciales filtradas, tokens de API y configuraciones de seguridad expuestas.
 
-¿Por qué usar JS-CredentialScanner?
+### ¿Por qué usar JS-CredentialScanner?
 
-Análisis en 3 Fases: Búsqueda estática, dinámica (Selenium) y análisis de patrones
-Detección de 30+ patrones de seguridad críticos
-Alto rendimiento: Procesamiento asíncrono masivo con hasta 50 conexiones concurrentes
-Clasificación por severidad: Alta, Media y Baja
-Sin duplicados: Sistema inteligente de eliminación de URLs y patrones repetidos
-Thread-safe: Operaciones seguras en entornos multi-hilo
+- **Análisis en 3 Fases**: Búsqueda estática, dinámica (Selenium) y análisis de patrones
+- **Detección de 30+ patrones** de seguridad críticos
+- **Alto rendimiento**: Procesamiento asíncrono masivo con hasta 50 conexiones concurrentes
+- **Clasificación por severidad**: Alta, Media y Baja
+- **Sin duplicados**: Sistema inteligente de eliminación de URLs y patrones repetidos
+- **Thread-safe**: Operaciones seguras en entornos multi-hilo
 
 ## Características
 
@@ -30,7 +30,6 @@ Thread-safe: Operaciones seguras en entornos multi-hilo
    - 50 conexiones HTTP concurrentes
    - Análisis de contenido con 30+ patrones regex
 
-## Instalación
 
 ## 🔧 Instalación
 
@@ -59,6 +58,15 @@ google-chrome --version
 # O en macOS:
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version
 ```
+
+## 🚀 Uso
+
+### Ejecución Básica
+
+```bash
+python JS-CredentialScanner.py
+```
+
 
 ## 🎮 Modos de Operación
 
