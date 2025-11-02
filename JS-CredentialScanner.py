@@ -79,7 +79,7 @@ def mostrar_banner():
   ░▒ ░ ▒░ ░ ░  ░ ░ ▒  ▒     ░     ░ ░  ░ ▒   ▒▒ ░░  ░      ░
   ░░   ░    ░    ░ ░  ░   ░         ░    ░   ▒   ░      ░   
    ░        ░  ░   ░                ░  ░     ░  ░       ░    
-LordCristhian - Optimizado con IA
+LordCristhian - Optimizado
 """
     print(f"{Fore.RED}{Style.BRIGHT}{banner}{Style.RESET_ALL}")
 
