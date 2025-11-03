@@ -162,3 +162,6 @@ https://cdn.example.com/libs/auth.js
 | Host | Subdominios internos | Descubrimiento de activos |
 
 ---
+## 🔥 Notas:
+- Es posible agregar nuevas expresiones regular, si imcorporacion se realiza en el metodo
+- Es posible agregar nuevos dominios para ser omitidos en el analisis, su incorportacion se realiza en el metodo
