@@ -68,18 +68,18 @@ class Config:
 
 # ===================== BANNER MEJORADO =====================
 def mostrar_banner():
-    banner = """
-                               [ ◉ ]
+    banner = f"""
+{Fore.RED}                               [ ◉ ]
     ╦╔═╗   ╔═╗┬─┐┌─┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┬  ╔═╗┌─┐┌─┐┌┐┌┌┐┌┌─┐┬─┐
     ║╚═╗───║  ├┬┘├┤  ││├┤ │││ │ │├─┤│  ╚═╗│  ├─┤││││││├┤ ├┬┘
    ╚╝╚═╝   ╚═╝┴└─└─┘─┴┘└─┘┘└┘ ┴ ┴┴ ┴┴─┘╚═╝└─┘┴ ┴┘└┘┘└┘└─┘┴└─
-   ═══════════════════════════════════════════════════════════
-        JavaScript Security Credential Detection Engine
+   ═══════════════════════════════════════════════════════════{Style.RESET_ALL}
+{Fore.WHITE}        JavaScript Security Credential Detection Engine
         30+ Patterns | Multi-Phase Analysis | High Speed
-                      v2.0 | LordCristhian
-   ═══════════════════════════════════════════════════════════  
+                      v2.0 | {Style.BRIGHT}{Fore.RED}Lord{Fore.WHITE}Crist{Fore.RED}hian{Style.RESET_ALL}
+{Fore.RED}   ═══════════════════════════════════════════════════════════{Style.RESET_ALL}
 """
-    print(f"{Fore.RED}{Style.BRIGHT}{banner}{Style.RESET_ALL}")
+    print(banner)
 
 # ===================== INICIALIZACIÓN =====================
 init(autoreset=True)
