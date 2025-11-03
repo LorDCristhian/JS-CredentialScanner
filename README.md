@@ -1,3 +1,7 @@
+
+<img width="526" height="290" alt="image" src="https://github.com/user-attachments/assets/18b9351a-ddfc-4449-a18b-2237cfeb4ba8" />
+
+
 # JS-CredentialScanner
 
 JS-CredentialScanner es una herramienta profesional de seguridad diseñada para auditores, pentesters y equipos de seguridad ofensiva. Realiza análisis exhaustivo de archivos JavaScript en aplicaciones web para identificar información sensible, credenciales filtradas, tokens de API y configuraciones de seguridad expuestas.
