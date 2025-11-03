@@ -70,14 +70,15 @@ class Config:
 def mostrar_banner():
     banner = """
     
+                            [ ◉ ]
     ╦╔═╗   ╔═╗┬─┐┌─┐┌┬┐┌─┐┌┐┌┌┬┐┬┌─┐┬  ╔═╗┌─┐┌─┐┌┐┌┌┐┌┌─┐┬─┐
     ║╚═╗───║  ├┬┘├┤  ││├┤ │││ │ │├─┤│  ╚═╗│  ├─┤││││││├┤ ├┬┘
    ╚╝╚═╝   ╚═╝┴└─└─┘─┴┘└─┘┘└┘ ┴ ┴┴ ┴┴─┘╚═╝└─┘┴ ┴┘└┘┘└┘└─┘┴└─
    ═══════════════════════════════════════════════════════════
       JavaScript Security Credential Detection Engine
       30+ Patterns | Multi-Phase Analysis | High Speed
-                      v2.0 | LordCristhian
-   ═══════════════════════════════════════════════════════════    
+                v2.0 | LordCristhian
+   ═══════════════════════════════════════════════════════════  
 """
     print(f"{Fore.RED}{Style.BRIGHT}{banner}{Style.RESET_ALL}")
 
