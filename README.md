@@ -41,8 +41,8 @@ JS-CredentialScanner es una herramienta profesional de seguridad diseñada para 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tuusuario/redteam-js-analyzer.git
-cd redteam-js-analyzer
+git clone https://github.com/LorDCristhian/JS-CredentialScanner.git
+cd JS-CredentialScanner
 ```
 
 ### 2. Instalar dependencias
