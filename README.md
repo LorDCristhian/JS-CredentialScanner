@@ -159,6 +159,6 @@ https://cdn.example.com/libs/auth.js
 | Google API Key | Claves de API pública | Uso no autorizado de servicios |
 | Base64 Text | Texto codificado | Posible información sensible |
 | Azure Authority URLs | Endpoints de autenticación | Información de configuración |
-| Activos Movistar/Telefónica | Subdominios internos | Descubrimiento de activos |
+| Host | Subdominios internos | Descubrimiento de activos |
 
 ---
