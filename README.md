@@ -1,8 +1,7 @@
 
 <p align="center">
-  <img width="526" height="290" alt="image" src="https://github.com/user-attachments/assets/18b9351a-ddfc-4449-a18b-2237cfeb4ba8" />
+  <img width="526" height="290" alt="image" src="https://github.com/user-attachments/assets/0576895b-50be-4a9f-893f-44cb3c5cc81f" />
 </p>
-
 
 # JS-CredentialScanner
 
