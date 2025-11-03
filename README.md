@@ -163,5 +163,7 @@ https://cdn.example.com/libs/auth.js
 
 ---
 ## 🔥 Notas:
-- Es posible agregar nuevas expresiones regular, si imcorporacion se realiza en el metodo
-- Es posible agregar nuevos dominios para ser omitidos en el analisis, su incorportacion se realiza en el metodo
+
+- Se pueden añadir nuevas expresiones regulares dentro de la función precompilar_patrones, la cual gestiona los patrones utilizados durante el análisis.
+- Es posible incluir dominios adicionales que deban ser excluidos del proceso, realizando su incorporación en la función es_dominio_excluido.
+- El rendimiento del análisis puede optimizarse ajustando los parámetros definidos en la clase Config.
