@@ -65,6 +65,16 @@ google-chrome --version
 
 ## 🚀 Uso
 
+### Recopilación de activos.
+```bash
+subfinder -dL dominios_proof.txt -silent | httprobe -prefer-https | tee urls.txt
+
+Donde:
+1. dominios_proof.txt contiene la lista de dominios que serán analizados.
+2. urls.txt es el archivo resultante que almacenará las direcciones activas, las cuales serán empleadas posteriormente por el programa para la búsqueda de archivos JavaScript y la detección de patrones.
+
+```
+
 ### Ejecución Básica
 
 ```bash
