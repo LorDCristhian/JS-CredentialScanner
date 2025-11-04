@@ -173,3 +173,13 @@ https://cdn.example.com/libs/auth.js
 - Se pueden añadir nuevas expresiones regulares dentro de la función precompilar_patrones, la cual gestiona los patrones utilizados durante el análisis.
 - Es posible incluir dominios adicionales que deban ser excluidos del proceso, realizando su incorporación en la función es_dominio_excluido.
 - El rendimiento del análisis puede optimizarse ajustando los parámetros definidos en la clase Config.
+
+## 🤝 Contribuir
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
