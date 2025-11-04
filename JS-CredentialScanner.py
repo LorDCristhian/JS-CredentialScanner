@@ -201,7 +201,7 @@ class JSAnalyzer:
     def _precompilar_patrones(self) -> Dict[str, re.Pattern]:
         """OPTIMIZACIÓN 1: Pre-compilar todos los regex para mayor velocidad (20-30% más rápido)"""
         patrones_raw = {
-            "Token_JWT": r"eyJ[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*\.[a-zA-Z0-9_-]*",
+            "Token_JWT": r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}",
             "Google-api-key": r"(?i)AIza[0-9A-Za-z\-_]{35}",
             "Authorization-Basic": r"(?i)(Authorization:\sbasic\s+[a-z0-9=:_\-+/]{5,100})",
             "Authorization-Bearer": r"(?i)(Authorization:\sbearer\s+[a-z0-9=:_\-\.+/]{5,100})",
