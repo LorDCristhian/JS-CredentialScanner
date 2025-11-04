@@ -186,11 +186,8 @@ https://cdn.example.com/libs/auth.js
 
 Las contribuciones son bienvenidas. Por favor:
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
+1. Fork el proyecto desde [github.com/LorDCristhian/JS-CredentialScanner](https://github.com/LorDCristhian/JS-CredentialScanner)
+2. Crea una rama para tu feature (`git checkout -b feature/NuevaFuncionalidad`)
+3. Commit tus cambios (`git commit -m 'Agregada nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/NuevaFuncionalidad`)
 5. Abre un Pull Request
-
-
-
