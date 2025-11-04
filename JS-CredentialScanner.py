@@ -165,7 +165,7 @@ class JSAnalyzer:
         self.severidad_baja = frozenset({
             "Activos_x.com.pe",
             "Activos_y.com.pe", 
-            "Activos_serviciosmovistar.com",
+            "Activos_z.com",
             "Google-api-key",
             "Base64_text",
             "Azure_Authority_URL",
@@ -215,7 +215,7 @@ class JSAnalyzer:
             "Generic_Secret_Base64": r"(?i)(?:secret|key|token)\s*(?:=|:)\s*['\"]?[A-Za-z0-9+/=]{20,}['\"]?",
             "Activos_x.com.pe": r"\b(?:[a-z0-9-]+\.)*prueba\.com\.pe\b",
             "Activos_y.com.pe": r"\b(?:[a-z0-9-]+\.)*test\.com\.pe\b",
-            "Activos_serviciosmovistar.com": r"\b(?:[A-Za-z0-9-]+\.)*serviciosmovistar\.com\b",
+            "Activos_z.com": r"\b(?:[A-Za-z0-9-]+\.)*servicios\.com\b",
             "OAuth2_Azure": r"https?://[a-zA-Z0-9\.-]+(?:b2clogin|login\.microsoftonline|login\.windows\.net)[^\s'\"<>]*",
             "Azure_Client_Secret": r"(?i)(client[_-]?secret|secret[_-]?key)\s*(=|:)\s*['\"][A-Za-z0-9\-_!@#\$%\^&\*]{16,}['\"]",
             "Azure_Tenant_Domain": r"(?i)[a-z0-9.-]+\.onmicrosoft\.com",
