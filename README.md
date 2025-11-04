@@ -1,13 +1,21 @@
 <div align="center">
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cristhianayalaleon/)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LorDCristhian)
-[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/tuusuario)
+![GitHub repo size](https://img.shields.io/github/repo-size/LorDCristhian/JS-CredentialScanner?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/LorDCristhian/JS-CredentialScanner?style=for-the-badge)
+![](https://hits.sh/github.com/LorDCristhian/JS-CredentialScanner.svg?style=for-the-badge&label=Visitas&color=2ea44f)
 
 </div>
 <p align="center">
   <img width="526" height="290" alt="image" src="https://github.com/user-attachments/assets/0576895b-50be-4a9f-893f-44cb3c5cc81f" />
 </p>
+<div align="center">
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cristhianayalaleon/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LorDCristhian)
+[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/tuusuario)
+
+</div>
+
 
 # JS-CredentialScanner
 
@@ -184,7 +192,5 @@ Las contribuciones son bienvenidas. Por favor:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-![GitHub repo size](https://img.shields.io/github/repo-size/LorDCristhian/JS-CredentialScanner?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/LorDCristhian/JS-CredentialScanner?style=for-the-badge)
-![](https://hits.sh/github.com/LorDCristhian/JS-CredentialScanner.svg?style=for-the-badge&label=Visitas&color=2ea44f)
+
 
