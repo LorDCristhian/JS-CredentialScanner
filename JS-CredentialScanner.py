@@ -137,7 +137,6 @@ class JSAnalyzer:
         self.severidad_alta = frozenset({
             "AWS Access Key ID", 
             "AWS Secret Access Key", 
-            "Azure Storage Account Key",
             "Token_JWT", 
             "Azure_Storage_Connection_String",
             "Authorization-Bearer",
@@ -210,7 +209,6 @@ class JSAnalyzer:
             "AWS Access Key ID": r"AKIA[0-9A-Z]{16}",
             "AWS Secret Access Key": r"(?i)aws_secret_access_key\s*(?:=|:)\s*['\"]?[A-Za-z0-9\/+=]{40,}['\"]?",
             "Github Access Token": r"gh[pous]_[A-Za-z0-9_]{36,}",
-            "Azure Storage Account Key": r"(?i)AccountKey\s*=\s*[A-Za-z0-9+/=]{88}",
             "Base64_text": r"(?<![A-Za-z0-9+/=])[A-Za-z0-9+/]{10,}==(?=\b|[^A-Za-z0-9+/=])",
             "Generic_Secret_Base64": r"(?i)(?:secret|key|token)\s*(?:=|:)\s*['\"]?[A-Za-z0-9+/=]{20,}['\"]?",
             "Activos_x.com.pe": r"\b(?:[a-z0-9-]+\.)*prueba\.com\.pe\b",
