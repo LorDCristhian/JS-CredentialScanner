@@ -184,7 +184,7 @@ https://cdn.example.com/libs/auth.js
 
 ## 🤝 Contribuir
 
-Las contribuciones son bienvenidas. Por favor:
+Las contribuciones son bienvenidas:
 
 1. Fork el proyecto desde [github.com/LorDCristhian/JS-CredentialScanner](https://github.com/LorDCristhian/JS-CredentialScanner)
 2. Crea una rama para tu feature (`git checkout -b feature/NuevaFuncionalidad`)
