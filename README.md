@@ -187,3 +187,5 @@ Las contribuciones son bienvenidas. Por favor:
 ![GitHub repo size](https://img.shields.io/github/repo-size/LorDCristhian/JS-CredentialScanner?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/LorDCristhian/JS-CredentialScanner?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues/LorDCristhian/JS-CredentialScanner?style=for-the-badge)
+![](https://hits.sh/github.com/LorDCristhian/JS-CredentialScanner.svg?style=for-the-badge&label=Visitas&color=2ea44f)
+
