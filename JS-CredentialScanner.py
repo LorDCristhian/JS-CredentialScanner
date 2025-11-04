@@ -108,7 +108,6 @@ def es_dominio_excluido(dominio: str) -> bool:
         "womtp.com",
         "walmeric.com",
         "msftauth.net",
-        "crossattachmedia.serviciosmovistar.com",
         "jsdelivr.net",
         "wsimg.com",
         "clickcease.com",
@@ -164,8 +163,8 @@ class JSAnalyzer:
         })
         
         self.severidad_baja = frozenset({
-            "Activos_movistar.com.pe",
-            "Activos_telefonica.com.pe", 
+            "Activos_x.com.pe",
+            "Activos_y.com.pe", 
             "Activos_serviciosmovistar.com",
             "Google-api-key",
             "Base64_text",
@@ -214,8 +213,8 @@ class JSAnalyzer:
             "Azure Storage Account Key": r"(?i)AccountKey\s*=\s*[A-Za-z0-9+/=]{88}",
             "Base64_text": r"(?<![A-Za-z0-9+/=])[A-Za-z0-9+/]{10,}==(?=\b|[^A-Za-z0-9+/=])",
             "Generic_Secret_Base64": r"(?i)(?:secret|key|token)\s*(?:=|:)\s*['\"]?[A-Za-z0-9+/=]{20,}['\"]?",
-            "Activos_movistar.com.pe": r"\b(?:[a-z0-9-]+\.)*movistar\.com\.pe\b",
-            "Activos_telefonica.com.pe": r"\b(?:[a-z0-9-]+\.)*telefonica\.com\.pe\b",
+            "Activos_x.com.pe": r"\b(?:[a-z0-9-]+\.)*prueba\.com\.pe\b",
+            "Activos_y.com.pe": r"\b(?:[a-z0-9-]+\.)*test\.com\.pe\b",
             "Activos_serviciosmovistar.com": r"\b(?:[A-Za-z0-9-]+\.)*serviciosmovistar\.com\b",
             "OAuth2_Azure": r"https?://[a-zA-Z0-9\.-]+(?:b2clogin|login\.microsoftonline|login\.windows\.net)[^\s'\"<>]*",
             "Azure_Client_Secret": r"(?i)(client[_-]?secret|secret[_-]?key)\s*(=|:)\s*['\"][A-Za-z0-9\-_!@#\$%\^&\*]{16,}['\"]",
