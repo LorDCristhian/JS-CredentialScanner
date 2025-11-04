@@ -1,4 +1,10 @@
 
+![Banner](https://img.shields.io/badge/Security-JavaScript_Scanner-red?style=for-the-badge&logo=javascript)
+![Version](https://img.shields.io/badge/version-2.0-blue?style=for-the-badge)
+![Python](https://img.shields.io/badge/python-3.8+-green?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/license-MIT-purple?style=for-the-badge)
+
+
 <p align="center">
   <img width="526" height="290" alt="image" src="https://github.com/user-attachments/assets/0576895b-50be-4a9f-893f-44cb3c5cc81f" />
 </p>
