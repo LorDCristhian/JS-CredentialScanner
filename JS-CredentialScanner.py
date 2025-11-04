@@ -209,7 +209,7 @@ class JSAnalyzer:
             "AWS Access Key ID": r"\b(AKIA|ABIA|ACCA|ASIA)[0-9A-Z]{16}\b",
             "AWS Secret Access Key": r"(?i)(?:aws_secret_access_key|secret[_-]?key)\s*[:=]\s*['\"]?([A-Za-z0-9/+=]{40})['\"]?",
             "Github Access Token": r"\b(gh[pousrSRT]_[A-Za-z0-9_]{36,255})\b",
-            "Base64_text": r"(?<![A-Za-z0-9+/=])(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?(?![A-Za-z0-9+/=])",
+            "Base64_text": r"(?<![A-Za-z0-9+/=])(?:[A-Za-z0-9+/]{4}){2,}(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?(?![A-Za-z0-9+/=])",
             "Generic_Secret_Base64": r"(?i)(?:secret|api[_-]?key|token|key)\s*[:=]\s*['\"]?([A-Za-z0-9+/=]{20,})['\"]?",
             "Activos_x.com.pe": r"\b(?:[a-z0-9-]+\.)*prueba\.com\.pe\b",
             "Activos_y.com.pe": r"\b(?:[a-z0-9-]+\.)*test\.com\.pe\b",
