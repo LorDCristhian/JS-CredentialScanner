@@ -635,7 +635,7 @@ async def ejecutar_flujo_completo(analyzer: JSAnalyzer):
     analyzer.urls_escritas.clear()
 
     # ===================== FASE 1: BÚSQUEDA ESTÁTICA =====================
-    print(f"{Fore.CYAN}{Style.BRIGHT}=== FASE 1: BÚSQUEDA ESTÁTICA DE ARCHIVOS JS (solo URLs con código 200) ==={Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{Style.BRIGHT}=== FASE 1: BÚSQUEDA ESTÁTICA DE ARCHIVOS JS  ==={Style.RESET_ALL}")
     
     contador_estatico = [0]
     total_js_encontrados = 0
@@ -674,7 +674,7 @@ async def ejecutar_flujo_completo(analyzer: JSAnalyzer):
     print(f"{Fore.GREEN}Total archivos JS únicos encontrados: {total_js_encontrados}{Style.RESET_ALL}\n")
 
     # ===================== FASE 2: BÚSQUEDA DINÁMICA CON SELENIUM =====================
-    print(f"{Fore.CYAN}{Style.BRIGHT}=== FASE 2: BÚSQUEDA DINÁMICA CON SELENIUM (solo URLs con código 200) ==={Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{Style.BRIGHT}=== FASE 2: BÚSQUEDA DINÁMICA CON SELENIUM  ==={Style.RESET_ALL}")
     
     urls_to_process = [l.strip() for l in lineas if l.strip()]
 
@@ -719,7 +719,7 @@ async def ejecutar_flujo_completo(analyzer: JSAnalyzer):
     print(f"{Fore.GREEN}Total archivos JS únicos encontrados (nuevos): {total_js_fase2}{Style.RESET_ALL}\n")
 
     # ===================== FASE 3: ANÁLISIS DE PATRONES =====================
-    print(f"{Fore.CYAN}{Style.BRIGHT}=== FASE 3: ANÁLISIS DE PATRONES EN ARCHIVOS JS (solo URLs con código 200) ==={Style.RESET_ALL}")
+    print(f"{Fore.CYAN}{Style.BRIGHT}=== FASE 3: ANÁLISIS DE PATRONES EN ARCHIVOS JS  ==={Style.RESET_ALL}")
     
     try:
         with open(analyzer.config.CHECAR_FILE, "r") as file:
