@@ -196,7 +196,7 @@ class JSAnalyzer:
             with self.file_lock:
                 with open(self.config.CHECAR_FILE, "r") as f:
                     self.urls_escritas = set(line.strip() for line in f if line.strip())
-                logger.info(f"Cargadas {len(self.urls_escritas)} URLs existentes del archivo")
+                #logger.info(f"Cargadas {len(self.urls_escritas)} URLs existentes del archivo")
         
     def _precompilar_patrones(self) -> Dict[str, re.Pattern]:
         """OPTIMIZACIÓN 1: Pre-compilar todos los regex para mayor velocidad (20-30% más rápido)"""
